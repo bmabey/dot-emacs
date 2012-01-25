@@ -1,3 +1,4 @@
+(ns-set-resource nil "ApplePressAndHoldEnabled" "NO")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -21,6 +22,7 @@
  '(cua-enable-cua-keys nil)
  '(cua-mode t nil (cua-base))
  '(cursor-type (quote bar) t)
+ '(default-frame-alist (quote ((vertical-scroll-bars . right) (background-color . "#000000") (background-mode . dark) (cursor-color . "#ffffff") (foreground-color . "#eaeaea") (tool-bar-lines . 0) (width . 120) (height . 48))))
  '(erc-autojoin-channels-alist (quote (("freenode.net"))))
  '(erc-autojoin-mode t)
  '(erc-modules (quote (autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
@@ -33,11 +35,12 @@
  '(evil-want-C-i-jump nil)
  '(evil-want-C-u-scroll t)
  '(evil-want-fine-undo t)
- '(exec-path (quote ("~/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/usr/local/bin" "/usr/X11/bin" "/usr/local/git/bin" "/Applications/Emacs.app/Contents/MacOS/bin" "/usr/local/texlive/2009/bin/universal-darwin/" "/opt/local/bin")))
+ '(exec-path (quote ("~/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/usr/local/bin" "/usr/X11/bin" "/usr/local/git/bin" "/Applications/Emacs.app/Contents/MacOS/bin" "/opt/local/bin")))
  '(ffap-machine-p-known (quote reject))
  '(global-auto-revert-mode t)
  '(gnuserv-program (concat exec-directory "/gnuserv"))
  '(hl-paren-background-colors nil)
+ '(hl-paren-colors (quote ("#ff2244" "#ff7700" "#ffff00" "#00ff00" "#2266ff" "#00aaff" "#ff00ff" "black")))
  '(ibuffer-default-sorting-mode (quote filename/process))
  '(ido-auto-merge-delay-time 60)
  '(ido-enable-flex-matching t)
@@ -49,7 +52,7 @@
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed t)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
- '(path-to-ctags "~/Developer/bin/ctags")
+ '(path-to-ctags "/Users/bmabey/Developer/bin/ctags")
  '(preview-transparent-color "black")
  '(quack-programs (quote ("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
  '(quack-remap-find-file-bindings-p nil)
@@ -87,8 +90,3 @@
                        (getenv "HOME")
                        (getenv "HOME")
                        (getenv "PATH")))
-
-;; Lion Hack: (ns-set-resource nil "ApplePressAndHoldEnabled" "NO")
-
-;;(color-theme-ir-black)
-;;(icomplete-mode t)
