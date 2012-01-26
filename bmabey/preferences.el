@@ -26,7 +26,12 @@ ace-jump-mode
 ;; yes, I like paredit on in my REPL
 (add-hook 'slime-repl-mode-hook 'paredit-mode)
 
-(idle-highlight-mode f) ;; TODO: fix this.. it doesn't work..
+;; ESK turns on idle-highlight-mode alwyas, and it bugs me...
+(defun turn-off-idle-highlight-mode ()
+  (idle-highlight-mode f))
+(add-hook 'prog-mode-hook 'turn-off-idle-highlight-mode)
+
+
 
 ;; gracias a http://www.emacswiki.org/emacs/DeletingWhitespace#toc3
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
