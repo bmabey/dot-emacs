@@ -8,8 +8,10 @@
       '(emacs-lisp-mode
         clojure-mode
         scheme-mode
+        shell-script-mode
         sql-mode
         R-mode
+        matlab-mode
         ruby-mode
         html-mode
         yaml-mode
@@ -18,4 +20,3 @@
         feature-mode))
 (dolist (mode linum-modes)
   (add-hook (intern (concat (symbol-name mode) "-hook")) 'turn-on-linum-mode))
-
