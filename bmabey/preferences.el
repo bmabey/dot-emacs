@@ -29,9 +29,8 @@ ace-jump-mode
 ;; ESK turns on idle-highlight-mode alwyas, and it bugs me...
 (defun turn-off-idle-highlight-mode ()
   (idle-highlight-mode f))
+
 (add-hook 'prog-mode-hook 'turn-off-idle-highlight-mode)
-
-
 
 ;; gracias a http://www.emacswiki.org/emacs/DeletingWhitespace#toc3
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
