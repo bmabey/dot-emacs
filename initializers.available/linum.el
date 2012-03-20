@@ -12,6 +12,7 @@
         sql-mode
         R-mode
         matlab-mode
+        python-mode
         ruby-mode
         html-mode
         yaml-mode
