@@ -34,3 +34,19 @@ ace-jump-mode
 
 ;; gracias a http://www.emacswiki.org/emacs/DeletingWhitespace#toc3
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(require 'tramp)
+(setq tramp-auto-save-directory '"~/.tramp")
+;(setq tramp-chunksize 500) ; use for openbsd
+(setq tramp-persistency-file-name "~/.emacs.d/tmp/tramp")
+(setq-default fill-column 120)
+;; In order to take advantage of ControlMaster (i.e. scpc) and avoid problems caused by ControlPersist you need to
+;; patch tramp. (taken from http://lists.gnu.org/archive/html/tramp-devel/2012-03/msg00011.html) Heres how:
+;; 1. open up /Applications/Emacs.app/Contents/Resources/lisp/net/tramp-sh.el.gz
+;; 2. Search for 'ControlMaster' to find where the tramp-login-args are being defined.
+;; 3. Next to the line where it says '("-o" "ControlMaster=yes")'  add: ("-o" "ControlPersist=no")
+;; 4. Save your change and run M-x byte-complile-file. Run this on the
+;; patched tramp-sh.el.gz file.
+
+
+
