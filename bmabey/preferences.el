@@ -1,6 +1,6 @@
 (ensure-packages-installed
  '(
-color-theme-cobalt
+;; color-theme-cobalt
 ace-jump-mode
 ))
 
@@ -9,7 +9,7 @@ ace-jump-mode
 ;;(require 'color-theme-cobalt)
 ;;(color-theme-cobalt)
 
-(color-theme-ir-black)
+;; (color-theme-ir-black)
 
 (icomplete-mode t)
 
@@ -48,5 +48,4 @@ ace-jump-mode
 ;; 4. Save your change and run M-x byte-complile-file. Run this on the
 ;; patched tramp-sh.el.gz file.
 
-
-
+(set-exec-path-from-shell-PATH)
