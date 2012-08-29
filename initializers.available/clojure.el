@@ -1,9 +1,11 @@
 (ensure-packages-installed
-  '(elisp-slime-nav ;; remove once we can add starter-kit back in...
-    ;; starter-kit-lisp ;; comment in once new starter-kit has been pushed to marmalade
-    clojure-mode midje-mode clojure-test-mode slime
+ '(starter-kit-lisp
+    clojure-mode
+    midje-mode
+    clojure-test-mode slime
+    clojurescript-mode
     slime-repl
-    ;;durendal
+    durendal
     highlight-parentheses))
 
 (require 'starter-kit-lisp)
@@ -12,12 +14,17 @@
 (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
 (add-hook 'slime-repl-mode-hook 'highlight-parentheses-mode)
 (add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
+;; (add-hook 'slime-repl-mode-hook 'paredit-mode)
 
-;;(require 'durendal)
-;;(add-hook 'clojure-mode-hook 'durendal-enable-auto-compile)
-;;(add-hook 'slime-repl-mode-hook 'durendal-slime-repl-paredit)
-;;(add-hook 'sldb-mode-hook 'durendal-dim-sldb-font-lock)
-;;(add-hook 'slime-compilation-finished-hook 'durendal-hide-successful-compile)
+
+(defun clojurescript-repl ()
+ (interactive)
+ (run-lisp "lein trampoline cljsbuild repl-listen"))
+
+(add-hook 'clojure-mode-hook 'durendal-enable-auto-compile)
+(add-hook 'slime-repl-mode-hook 'durendal-slime-repl-paredit)
+(add-hook 'sldb-mode-hook 'durendal-dim-sldb-font-lock)
+;; (add-hook 'slime-compilation-finished-hook 'durendal-hide-successful-compile)
 
 (put 'def-atomic-model 'clojure-backtracking-indent '(4 4 (2)))
 (add-hook 'clojure-mode-hook (lambda ()
@@ -51,5 +58,8 @@
                                  ;; predict project
                                  (def-atomic-model 2)
                                  (when-attribute 2)
+
+                                 ;; stuffs
+                                 (when-let-multi 1)
 
                                )))
