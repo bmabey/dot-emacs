@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: dbg
+# --
+#import pdb; pdb.set_trace(); 5 + 5
+from IPython.core.debugger import Pdb; Pdb(color_scheme='Linux').set_trace()
