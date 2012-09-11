@@ -45,6 +45,7 @@
  '(ido-auto-merge-delay-time 60)
  '(ido-enable-flex-matching t)
  '(ido-mode (quote both) nil (ido))
+ '(ido-use-virtual-buffers nil)
  '(imenu-max-item-length 120)
  '(init-face-from-resources nil)
  '(js2-basic-offset 2)
