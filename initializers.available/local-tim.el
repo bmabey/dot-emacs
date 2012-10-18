@@ -68,4 +68,5 @@
 (global-visual-line-mode)
 (global-hl-line-mode 1)
 
+(global-set-key (kbd "C-x \\") 'align-regexp)
 
