@@ -42,8 +42,9 @@
 (global-set-key (kbd "C-x s-0") 'kill-buffer-and-delete-window)
 (global-set-key [(control super k)] 'kill-buffer-and-delete-window)
 (global-set-key [(control super clear)] 'kill-buffer-and-delete-window) ;; for some reason... OS X sends 'clear' instead of k with certain modifiers
+(global-set-key (kbd "<C-s-268632075>") 'kill-buffer-and-delete-window) ;; and in emacs 24.1... it sends this. LAME
 
-;; (kbd "<C-s-clear>")
+
 
 (defun ns-copy-including-secondary ()
   (interactive)
