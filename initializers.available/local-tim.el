@@ -53,20 +53,6 @@
                                   (buffer-substring (point) (mark t)))))
 ;; (defun split-window-and-switch-to-previous-buffer)
 
-(defun open-textmate ()
-  "Opens current buffer in textmate"
-  (interactive)
-  (shell-command (format "mate %S -l %d -a" (buffer-file-name) (line-number-at-pos))))
-
-(global-set-key (kbd "<C-M-s-268632084>") 'open-textmate)
-
-(defun open-windows-emacs ()
-  "Opens current buffer in windows emacs"
-  (interactive)
-  (shell-command (format "emr +%d:%d %S" (line-number-at-pos) (current-column) (buffer-file-name))))
-
-(global-set-key (kbd "<C-M-s-268632069>") 'open-windows-emacs)
-
 (defun swap-region-around-text ()
   "swaps region around specified text"
   (interactive)
@@ -82,7 +68,3 @@
 (global-hl-line-mode 1)
 
 
-(defun rvm-use-system ()
-  "Use system ruby"
-  (interactive)
-  (rvm-use "system" rvm--gemset-default))
