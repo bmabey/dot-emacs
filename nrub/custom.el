@@ -26,7 +26,7 @@
  '(erc-autojoin-mode t)
  '(erc-modules (quote (autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
  '(evil-cross-lines t)
- '(evil-emacs-state-modes (quote (bookmark-bmenu-mode bookmark-edit-annotation-mode browse-kill-ring-mode compilation-mode completion-list-mode Custom-mode debugger-mode efs-mode ert-results-mode gnus-group-mode gnus-summary-mode jde-javadoc-checker-report-mode mh-folder-mode occur-mode rcirc-mode tar-mode vm-mode vm-summary-mode ibuffer-mode sldb-mode dired-mode magit-commit-mode magit-log-mode magit-stash-mode magit-status-mode)))
+ '(evil-emacs-state-modes (quote (bookmark-bmenu-mode bookmark-edit-annotation-mode browse-kill-ring-mode compilation-mode completion-list-mode Custom-mode debugger-mode efs-mode ert-results-mode gnus-group-mode gnus-summary-mode jde-javadoc-checker-report-mode mh-folder-mode occur-mode rcirc-mode tar-mode vm-mode vm-summary-mode ibuffer-mode sldb-mode dired-mode magit-commit-mode magit-log-mode magit-stash-mode magit-status-mode magit-log-edit-mode)))
  '(evil-find-skip-newlines t)
  '(evil-move-cursor-back nil)
  '(evil-regexp-search t)
