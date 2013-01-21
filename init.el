@@ -1,29 +1,31 @@
 (add-to-list 'load-path user-emacs-directory)
 
 ;; old starter kit legacy code...
-;;TODO: remove dependece on the following lines and rm -rf corresponding files...
+;;TODO: remove dependence on the following lines and rm -rf corresponding files...
 (setq dotfiles-dir user-emacs-directory)
 (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
-(setq autoload-file (concat dotfiles-dir "loaddefs.el")) 
+(setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (load autoload-file)
 ;;;;
 
 
 (require 'package)
 (add-to-list 'package-archives
-              '("marmalade" . "http://marmalade-repo.org/packages/") t)
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
-              '("tromey" . "http://tromey.com/elpa/") t)
+             '("tromey" . "http://tromey.com/elpa/") t)
+(add-to-list `package-archives
+             '("melpa" . "http://melpa.milbox.net/packages/") t)
 
 (package-initialize)
 
 (when (not package-archive-contents)
-   (package-refresh-contents))
+  (package-refresh-contents))
 
 (defun ensure-packages-installed (packages)
   (dolist (p packages)
-  (when (not (package-installed-p p))
-    (package-install p))))
+    (when (not (package-installed-p p))
+      (package-install p))))
 
 ;; TODO: Switch to the package once a release is made... right now we rely on unreleased changes
 ;;(ensure-packages-installed
