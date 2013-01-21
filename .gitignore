@@ -25,3 +25,5 @@ scratch/
 .smex-items
 elpa/*
 swank
+abbrev_defs
+initializers.enabled/*
