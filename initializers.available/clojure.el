@@ -6,6 +6,8 @@
     clojurescript-mode
     nrepl
     nrepl-ritz
+    auto-complete
+    ac-nrepl
     ;; slime
     ;; slime-repl
     ;; durendal
@@ -16,6 +18,8 @@
 (require 'highlight-parentheses)
 
 (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
+
+
 (add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
 (add-hook 'nrepl-mode-hook 'paredit-mode)
 
@@ -44,10 +48,26 @@
  (interactive)
  (run-lisp "lein trampoline cljsbuild repl-listen"))
 
-;; (add-hook 'clojure-mode-hook 'durendal-enable-auto-compile)
-;; (add-hook 'slime-repl-mode-hook 'durendal-slime-repl-paredit)
-;; (add-hook 'sldb-mode-hook 'durendal-dim-sldb-font-lock)
-;; (add-hook 'slime-compilation-finished-hook 'durendal-hide-successful-compile)
+
+
+(require 'ac-nrepl)
+(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'nrepl-mode))
+
+(add-hook 'nrepl-mode-hook 'auto-complete-mode)
+(add-hook 'nrepl-interaction-mode-hook 'auto-complete-mode)
+
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc)
+
 
 (put 'def-atomic-model 'clojure-backtracking-indent '(4 4 (2)))
 (add-hook 'clojure-mode-hook (lambda ()
