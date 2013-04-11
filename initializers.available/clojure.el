@@ -2,28 +2,51 @@
  '(starter-kit-lisp
     clojure-mode
     midje-mode
-    clojure-test-mode slime
+    clojure-test-mode
     clojurescript-mode
-    slime-repl
-    durendal
-    highlight-parentheses))
+    nrepl
+    nrepl-ritz
+    ;; slime
+    ;; slime-repl
+    ;; durendal
+    highlight-parentheses
+    ))
 
 (require 'starter-kit-lisp)
 (require 'highlight-parentheses)
 
 (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
-(add-hook 'slime-repl-mode-hook 'highlight-parentheses-mode)
-(add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
-;; (add-hook 'slime-repl-mode-hook 'paredit-mode)
+(add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
+(add-hook 'nrepl-mode-hook 'paredit-mode)
+
+(add-hook 'nrepl-interaction-mode-hook
+          'nrepl-turn-on-eldoc-mode)
+
+
+
+(add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
+(defun my-nrepl-mode-setup ()
+  (require 'nrepl-ritz))
+
+
+;;    Make C-c C-z switch to the *nrepl* buffer in the current window:
+(add-to-list 'same-window-buffer-names "*nrepl*")
+
+
+;; Enabling CamelCase support for editing commands (like forward-word, backward-word, etc) in nREPL
+;; is quite useful since we often have to deal with Java class and method names. The built-in Emacs
+;; minor mode subword-mode provides such functionality:
+(add-hook 'nrepl-mode-hook 'subword-mode)
+
 
 
 (defun clojurescript-repl ()
  (interactive)
  (run-lisp "lein trampoline cljsbuild repl-listen"))
 
-(add-hook 'clojure-mode-hook 'durendal-enable-auto-compile)
-(add-hook 'slime-repl-mode-hook 'durendal-slime-repl-paredit)
-(add-hook 'sldb-mode-hook 'durendal-dim-sldb-font-lock)
+;; (add-hook 'clojure-mode-hook 'durendal-enable-auto-compile)
+;; (add-hook 'slime-repl-mode-hook 'durendal-slime-repl-paredit)
+;; (add-hook 'sldb-mode-hook 'durendal-dim-sldb-font-lock)
 ;; (add-hook 'slime-compilation-finished-hook 'durendal-hide-successful-compile)
 
 (put 'def-atomic-model 'clojure-backtracking-indent '(4 4 (2)))
