@@ -40,9 +40,6 @@
 [submodule "vendor/ess"]
 	path = vendor/ess
 	url = https://github.com/emacsmirror/ess.git
-[submodule "vendor/auto-complete"]
-	path = vendor/auto-complete
-	url = git://github.com/timcharper/auto-complete.git
 [submodule "vendor/evil"]
 	path = vendor/evil
 	url = git://gitorious.org/evil/evil.git
