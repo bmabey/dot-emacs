@@ -44,4 +44,22 @@
 (load (concat dotfiles-dir "initializers.el"))
 (ini-load-all)
 
+
+;; TODO: figure this out so I can use TAB with AC and yas...
+;; http://iany.me/2012/03/fix-tab-binding-for-yasnippet-and-auto-complete/
+;; (custom-set-variables
+;;  '(ac-trigger-key "TAB")
+;;  '(ac-auto-start nil)
+;;  '(ac-use-menu-map t))
+
+;; (defun iy-tab-noconflict ()
+;;   (let ((command (key-binding [tab]))) ; remember command
+;;     (local-unset-key [tab]) ; unset from (kbd "<tab>")
+;;     (local-set-key (kbd "TAB") command))) ; bind to (kbd "TAB")
+
+;; (add-hook 'ruby-mode-hook 'iy-ac-tab-noconflict)
+;; (add-hook 'markdown-mode-hook 'iy-ac-tab-noconflict)
+;; (add-hook 'org-mode-hook 'iy-ac-tab-noconflict)
+;; (add-hook 'clojure-mode-hook 'iy-ac-tab-noconflict)
+
 (server-start)
