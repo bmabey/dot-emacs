@@ -5,6 +5,7 @@
         ))
 
 (require 'starter-kit-ruby)
+(require 'rcodetools) ;; provides the xmp filter (http://emacsblog.org/2007/07/21/package-faves-rcodetools/)
 
 (eval-after-load 'ruby-mode
   '(progn
@@ -21,6 +22,8 @@
              (ruby-send-region (region-beginning) (region-end)))
          (ruby-send-last-sexp)))
 
+     
+     (define-key ruby-mode-map (kbd "s-r") 'xmp)
      (define-key ruby-mode-map (kbd "C-i") 'ruby-eval-region-or-last-sexp)
      (define-key ruby-mode-map (kbd "C-I") 'ruby-send-definition)
      (define-key ruby-mode-map (kbd "C-c l") 'ruby-send-line)
