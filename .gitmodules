@@ -55,3 +55,6 @@
 [submodule "vendor/emacs-starter-kit"]
 	path = vendor/emacs-starter-kit
 	url = https://github.com/technomancy/emacs-starter-kit.git
+[submodule "vendor/emacs-pry"]
+	path = vendor/emacs-pry
+	url = git@github.com:jacott/emacs-pry
