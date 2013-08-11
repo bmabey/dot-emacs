@@ -58,3 +58,6 @@
 [submodule "vendor/emacs-pry"]
 	path = vendor/emacs-pry
 	url = git@github.com:jacott/emacs-pry
+[submodule "vendor/clojure-snippets"]
+	path = vendor/clojure-snippets
+	url = git@github.com:bmabey/clojure-snippets.git
