@@ -8,6 +8,7 @@
     nrepl-ritz
     auto-complete
     ac-nrepl
+    clojure-cheatsheet
     ;; slime
     ;; slime-repl
     ;; durendal
@@ -29,8 +30,6 @@
 
 (add-hook 'nrepl-interaction-mode-hook
           'nrepl-turn-on-eldoc-mode)
-
-
 
 (add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
 (defun my-nrepl-mode-setup ()
