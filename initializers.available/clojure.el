@@ -51,9 +51,14 @@
 
 (add-hook 'nrepl-connected-hook 'nrepl-set-print-length)
 
-(defun clojurescript-repl ()
- (interactive)
- (run-lisp "lein trampoline cljsbuild repl-listen"))
+;; ansi color for midje autotest.. via https://github.com/marick/Midje/issues/222
+(defun nrepl-emit-output (buffer string &optional bol)
+  "Using BUFFER, emit STRING.
+If BOL is non-nil, emit at the beginning of the line."
+  (with-current-buffer buffer
+    (nrepl-emit-output-at-pos buffer string nrepl-input-start-mark bol)
+    (ansi-color-apply-on-region (marker-position nrepl-output-start) (point-max))))
+
 
 ;;Auto Complete
 (require 'ac-nrepl)
@@ -137,13 +142,12 @@
   (save-excursion
     (if (equal 1 (point))
         (message "beginning of file reached, this was probably a mistake.")
-      (cond ((equal "\"" (char-at-point)) 
+      (cond ((equal "\"" (char-at-point))
              (insert ":" (clj-string-name (clj-delete-and-extract-sexp))))
-            ((equal ":" (char-at-point)) 
+            ((equal ":" (char-at-point))
              (insert "\"" (clj-keyword-name (clj-delete-and-extract-sexp)) "\""))
             (t (progn
                  (backward-char)
                  (clj-toggle-keyword-string)))))))
 
 (define-key clojure-mode-map (kbd "s-:") 'clj-toggle-keyword-string)
-
