@@ -53,6 +53,8 @@
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed t)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
+ '(nrepl-history-file "~/.nrepl-history.eld")
+ '(nrepl-history-size 1000)
  '(path-to-ctags "/Users/bmabey/Developer/bin/ctags")
  '(preview-transparent-color "black")
  '(quack-programs (quote ("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
@@ -63,7 +65,7 @@
  '(rvm-default-ruby-name "ruby-1.9.2-p290")
  '(rvm-executable "~/Developer/.rvm/bin/rvm")
  '(rvm-ruby-187-name "ruby-1.8.7-p302")
- '(safe-local-variable-values (quote ((textmate-gf-exclude . "(/|^)(\\.+[^/]+|asset-cache|vendor|tmp|log|classes|build|node_modules|target|components)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)") (textmate-gf-exclude . "(/|^)(\\.+[^/]+|asset-cache|vendor|tmp|log|classes|build|node_modules)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)") (textmate-gf-exclude . "(/|^)(\\.+[^/]+|asset-cache|tmp|log|classes|build)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)") (textmate-gf-exclude . "(/|^)(\\.+[^/]+|vendor|components|tmp|log|target|build)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)|(^\\./data)") (textmate-gf-exclude . "(/|^)(\\.+[^/]+|node_modules|components)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)|(^\\./data)") (textmate-gf-exclude . "(/|^)(\\.+[^/]+|asset-cache|vendor|tmp|log|classes|build)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)") (textmate-gf-exclude . "(/|^)(\\.+[^/]+|vendor|checkouts|chefmaster|tmp|lib|log|classes|model-library|build)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)|(^\\./data)") (textmate-gf-exclude . "(/|^)(\\.+[^/]+|vendor|chefmaster|tmp|lib|log|classes|model-library|build)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)|(^\\./data)") (C++\;indent-tabs-mode . t) (textmate-gf-exclude . "(/|^)(\\.+[^/]+|vendor|tmp|log|classes|build)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)") (textmate-gf-exclude . "(/|^)(\\.+[^/]+|vendor|fixtures|tmp|log|build)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)") (textmate-gf-exclude . "(/|^)(.+[^/]+|vendor|fixtures|tmp|log|build)($|/)|(.xcodeproj|.nib|.framework|.app|.pbproj|.pbxproj|.xcode|.xcodeproj|.bundle|.pyc)(/|$)") (textmate-gf-exclude "(/|^)(.+[^/]+|vendor|fixtures|tmp|log|build)($|/)|(.xcodeproj|.nib|.framework|.app|.pbproj|.pbxproj|.xcode|.xcodeproj|.bundle|.pyc)(/|$)") (textmate-project-roots "(/|^)(.+[^/]+|vendor|fixtures|tmp|log|build)($|/)|(.xcodeproj|.nib|.framework|.app|.pbproj|.pbxproj|.xcode|.xcodeproj|.bundle|.pyc)(/|$)") (encoding . utf-8) (textmate-project-roots ".dir-locals.el") (ack-arguments "--ignore-dir=ruby") (*textmate-gf-exclude* . "/\\.|vendor|ruby/gems|classes|fixtures|tmp|log|build|\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc") (ruby-compilation-executable . "ruby") (ruby-compilation-executable . "ruby1.8") (ruby-compilation-executable . "ruby1.9") (ruby-compilation-executable . "rbx") (ruby-compilation-executable . "jruby"))))
+ '(safe-local-variable-values (quote ((textmate-gf-exclude . "(/|^)(\\.+[^/]+|asset-cache|vendor|tmp|log|classes|build|node_modules|target|components)($|/)|(\\.xcodeproj|\\.nib|\\.framework|\\.app|\\.pbproj|\\.pbxproj|\\.xcode|\\.xcodeproj|\\.bundle|\\.pyc)(/|$)") (textmate-project-roots ".dir-locals.el") (ruby-compilation-executable . "ruby") (ruby-compilation-executable . "ruby1.8") (ruby-compilation-executable . "ruby1.9") (ruby-compilation-executable . "rbx") (ruby-compilation-executable . "jruby") (whitespace-line-column . 80) (lexical-binding . t))))
  '(sentence-end-double-space nil)
  '(sh-basic-offset 2)
  '(sh-indentation 2)
@@ -92,3 +94,5 @@
                        (getenv "HOME")
                        (getenv "HOME")
                        (getenv "PATH")))
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
