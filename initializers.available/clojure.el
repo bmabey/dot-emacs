@@ -14,8 +14,12 @@
     highlight-parentheses
     ))
 
+
 (require 'starter-kit-lisp)
 (require 'highlight-parentheses)
+
+(add-to-list 'load-path "~/.emacs.d/vendor/nrepl-inspect")
+(require 'nrepl-inspect)
 
 (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
 

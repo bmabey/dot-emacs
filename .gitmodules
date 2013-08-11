@@ -61,3 +61,6 @@
 [submodule "vendor/clojure-snippets"]
 	path = vendor/clojure-snippets
 	url = git@github.com:bmabey/clojure-snippets.git
+[submodule "vendor/nrepl-inspect"]
+	path = vendor/nrepl-inspect
+	url = git@github.com:vitalreactor/nrepl-inspect.git
