@@ -46,14 +46,17 @@
 ;; minor mode subword-mode provides such functionality:
 (add-hook 'nrepl-mode-hook 'subword-mode)
 
+;; specify the print length to be 100 to stop infinite sequences killing things.
+(defun nrepl-set-print-length ()
+  (nrepl-send-string-sync "(set! *print-length* 100)" "clojure.core"))
 
+(add-hook 'nrepl-connected-hook 'nrepl-set-print-length)
 
 (defun clojurescript-repl ()
  (interactive)
  (run-lisp "lein trampoline cljsbuild repl-listen"))
 
-
-
+;;Auto Complete
 (require 'ac-nrepl)
 (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
 (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
