@@ -55,6 +55,8 @@
 (add-hook 'nrepl-interaction-mode-hook
           'nrepl-turn-on-eldoc-mode)
 
+
+
 (add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
 (defun my-nrepl-mode-setup ()
   (require 'nrepl-ritz))
