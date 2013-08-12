@@ -45,6 +45,13 @@
 (ini-load-all)
 
 
+
+(global-set-key (kbd "s-b") 'switch-to-buffer)
+
+;; complete filename
+(global-set-key "\M-\\" 'comint-dynamic-complete-filename)
+
+
 ;; TODO: figure this out so I can use TAB with AC and yas...
 ;; http://iany.me/2012/03/fix-tab-binding-for-yasnippet-and-auto-complete/
 ;; (custom-set-variables
