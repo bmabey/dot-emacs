@@ -150,4 +150,24 @@ If BOL is non-nil, emit at the beginning of the line."
                  (backward-char)
                  (clj-toggle-keyword-string)))))))
 
+
 (define-key clojure-mode-map (kbd "s-:") 'clj-toggle-keyword-string)
+
+(defun nrepl-reset ()
+  (interactive)
+  (set-buffer "*nrepl*")
+  (goto-char (point-max))
+  (insert "(user/reset)")
+  (nrepl-return))
+
+(defun nrepl-hard-reset (connection-buffer)
+  "Close the nrepl connection for CONNECTION-BUFFER and jacks in again."
+  (interactive (list (nrepl-current-connection-buffer)))
+  (nrepl-close connection-buffer)
+  (nrepl-jack-in))
+
+(define-key clojure-mode-map (kbd "s-R") 'nrepl-reset)
+(define-key clojure-mode-map (kbd "s-I") 'nrepl-inspect)
+(define-key clojure-mode-map (kbd "s-p") 'ac-nrepl-popup-doc)
+(define-key clojure-mode-map (kbd "s-P") 'nrepl-doc)
+;; (define-key clojure-mode-map (kbd "C-s-r") 'nrepl-hard-reset)
