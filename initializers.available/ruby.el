@@ -1,8 +1,8 @@
 (ensure-packages-installed
-  '(;;starter-kit-ruby - use this and remove vendor version when new version has been pushed to marmalade..
-       ruby-compilation
-       inf-ruby
-        ))
+  '(starter-kit-ruby
+    ruby-compilation
+    inf-ruby
+    ruby-electric))
 
 (require 'starter-kit-ruby)
 (require 'rcodetools) ;; provides the xmp filter (http://emacsblog.org/2007/07/21/package-faves-rcodetools/)
@@ -22,7 +22,7 @@
              (ruby-send-region (region-beginning) (region-end)))
          (ruby-send-last-sexp)))
 
-     
+
      (define-key ruby-mode-map (kbd "s-r") 'xmp)
      (define-key ruby-mode-map (kbd "C-i") 'ruby-eval-region-or-last-sexp)
      (define-key ruby-mode-map (kbd "C-I") 'ruby-send-definition)
