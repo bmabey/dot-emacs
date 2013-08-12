@@ -1,4 +1,8 @@
 #!/bin/sh
+# Usage:
+# emacs-osx file.txt:23 any-options-for-emacsclient
+
+options=${@:2}
 osascript -e 'tell application "Emacs" to activate'
 until [ -z "$1" ]; do
   filename="$1"
@@ -9,7 +13,9 @@ until [ -z "$1" ]; do
     linenumber=""
   fi
 
-  until ( /Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n $linenumber "$filename" 2> /dev/null ); do
+
+
+  until ( /Applications/Emacs.app/Contents/MacOS/bin/emacsclient $options -n $linenumber "$filename" 2> /dev/null ); do
     printf .
     sleep 1
   done
