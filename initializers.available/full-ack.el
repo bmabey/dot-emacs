@@ -1,3 +1,6 @@
+(ensure-packages-installed
+ '(full-ack))
+
 (defun ack-here ()
   "Run ack from default-directory of the current buffer"
   (interactive)
