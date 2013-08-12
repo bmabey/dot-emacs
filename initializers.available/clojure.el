@@ -18,15 +18,15 @@
 
 (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
 (add-hook 'clojure-mode-hook 'paredit-mode)
+
 ;;(add-hook 'clojure-mode-hook 'evil-paredit-mode)
 
 (require 'parenface)
 (set-face-foreground 'paren-face "Gray40")
-(font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'paren-face)))
-
-
-;; meant to be used as a hook but due to a bug it was requring that I call clojure-mode again
-(add-hook 'clojure-mode-hook (paren-face-add-support clojure-font-lock-keywords))
+;; not using the hook because of a bug that required me to call clojure-mode twice...
+(font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'paren-face)
+                                        ("\\[\\|\\]\\|{\\|}" . 'bracket-face)))
+;; (add-hook 'clojure-mode-hook (paren-face-add-support clojure-font-lock-keywords))
 
 (eval-after-load 'clojure-mode
   '(font-lock-add-keywords
