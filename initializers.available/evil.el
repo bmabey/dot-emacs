@@ -1,5 +1,8 @@
-(add-to-list 'load-path "~/.emacs.d/vendor/evil")
-(add-to-list 'load-path "~/.emacs.d/vendor/evil-surround")
+(ensure-packages-installed
+ '(evil
+   surround ;; evil-surround
+   evil-numbers))
+
 (require 'evil)
 (require 'surround)
 (evil-mode 1)
@@ -16,3 +19,6 @@
 
 (global-set-key (kbd "C-]") 'evil-find-char)
 (global-set-key (kbd "C-M-]") 'evil-find-char-backward)
+
+(global-set-key (kbd "C-c +") 'evil-numbers/inc-at-pt)
+(global-set-key (kbd "C-c -") 'evil-numbers/dec-at-pt)
