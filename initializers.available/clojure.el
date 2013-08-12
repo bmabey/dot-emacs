@@ -1,6 +1,5 @@
 (ensure-packages-installed
- '(starter-kit-lisp
-    clojure-mode
+ '(clojure-mode
     midje-mode
     clojure-test-mode
     nrepl
@@ -8,17 +7,47 @@
     auto-complete
     ac-nrepl
     clojure-cheatsheet
+    parenface
     highlight-parentheses))
 
 
-(require 'starter-kit-lisp)
 (require 'highlight-parentheses)
 
 (add-to-list 'load-path "~/.emacs.d/vendor/nrepl-inspect")
 (require 'nrepl-inspect)
 
 (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
+(add-hook 'clojure-mode-hook 'paredit-mode)
+;;(add-hook 'clojure-mode-hook 'evil-paredit-mode)
 
+(require 'parenface)
+(set-face-foreground 'paren-face "Gray40")
+(font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'paren-face)))
+
+
+;; meant to be used as a hook but due to a bug it was requring that I call clojure-mode again
+(add-hook 'clojure-mode-hook (paren-face-add-support clojure-font-lock-keywords))
+
+(eval-after-load 'clojure-mode
+  '(font-lock-add-keywords
+    'clojure-mode `(("(\\(fn\\)[\[[:space:]]"
+                     (0 (progn (compose-region (match-beginning 1)
+                                               (match-end 1) "λ")
+                               nil))))))
+
+(eval-after-load 'clojure-mode
+  '(font-lock-add-keywords
+    'clojure-mode `(("\\(#\\)("
+                     (0 (progn (compose-region (match-beginning 1)
+                                               (match-end 1) "ƒ")
+                               nil))))))
+
+(eval-after-load 'clojure-mode
+  '(font-lock-add-keywords
+    'clojure-mode `(("\\(#\\){"
+                     (0 (progn (compose-region (match-beginning 1)
+                                               (match-end 1) "∈")
+                               nil))))))
 
 (add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
 (add-hook 'nrepl-mode-hook 'paredit-mode)

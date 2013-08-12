@@ -1,7 +1,9 @@
 (ensure-packages-installed
  '(evil
    surround ;; evil-surround
-   evil-numbers))
+   evil-numbers
+   ;;evil-paredit
+   ))
 
 (require 'evil)
 (require 'surround)
@@ -22,3 +24,6 @@
 
 (global-set-key (kbd "C-c +") 'evil-numbers/inc-at-pt)
 (global-set-key (kbd "C-c -") 'evil-numbers/dec-at-pt)
+
+
+;;(add-hook 'emacs-lisp-mode-hook 'evil-paredit-mode)
