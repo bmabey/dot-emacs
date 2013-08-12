@@ -3,17 +3,12 @@
     clojure-mode
     midje-mode
     clojure-test-mode
-    clojurescript-mode
     nrepl
     nrepl-ritz
     auto-complete
     ac-nrepl
     clojure-cheatsheet
-    ;; slime
-    ;; slime-repl
-    ;; durendal
-    highlight-parentheses
-    ))
+    highlight-parentheses))
 
 
 (require 'starter-kit-lisp)
