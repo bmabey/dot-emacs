@@ -13,12 +13,6 @@
 [submodule "vendor/textmate"]
 	path = vendor/textmate
 	url = git://github.com/timcharper/textmate.el.git
-[submodule "vendor/vimpulse"]
-	path = vendor/vimpulse
-	url = git://github.com/timcharper/vimpulse.git
-[submodule "vendor/vimpulse-surround"]
-	path = vendor/vimpulse-surround
-	url = git://github.com/timcharper/vimpulse-surround.el.git
 [submodule "vendor/rhtml-minor-mode"]
 	path = vendor/rhtml-minor-mode
 	url = git://github.com/eschulte/rhtml.git
