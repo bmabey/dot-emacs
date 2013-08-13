@@ -123,10 +123,6 @@
 
 (add-hook 'nrepl-connected-hook 'nrepl-set-print-length)
 
-(defadvice nrepl-default-err-handler (after nrepl-focus-errors activate)
-  "Focus the error buffer after errors, like Emacs normally does."
-  (select-window (get-buffer-window "*nrepl-error*")))
-
 ;;Auto Complete
 (require 'ac-nrepl)
 (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
@@ -196,10 +192,11 @@
   (nrepl-close connection-buffer)
   (nrepl-jack-in))
 
-
 ;; key bindings
 
 (define-key clojure-mode-map (kbd "s-:") 'clj-toggle-keyword-string)
+(define-key clojure-mode-map (kbd "s-K") 'nrepl-close-ancilliary-buffers)
+
 (define-key clojure-mode-map (kbd "s-R") 'nrepl-reset)
 (define-key clojure-mode-map (kbd "s-I") 'nrepl-inspect)
 (define-key clojure-mode-map (kbd "s-p") 'ac-nrepl-popup-doc)
