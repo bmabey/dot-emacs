@@ -11,22 +11,27 @@
     highlight-parentheses))
 
 
-(require 'highlight-parentheses)
-
-(add-to-list 'load-path "~/.emacs.d/vendor/nrepl-inspect")
-(require 'nrepl-inspect)
-
-(add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
-(add-hook 'clojure-mode-hook 'paredit-mode)
-
-;;(add-hook 'clojure-mode-hook 'evil-paredit-mode)
+;; general lisp improvements
+(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
+(define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 
 (require 'parenface)
 (set-face-foreground 'paren-face "Gray40")
+
+;; clojure-mode
+
 ;; not using the hook because of a bug that required me to call clojure-mode twice...
-(font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'paren-face)
-                                        ("\\[\\|\\]\\|{\\|}" . 'bracket-face)))
 ;; (add-hook 'clojure-mode-hook (paren-face-add-support clojure-font-lock-keywords))
+(dolist (mode '(clojure)) ;; nrepl... didn't seem to work...
+(let ((mode-name (intern (concat (symbol-name mode) "-mode"))))
+  (font-lock-add-keywords mode-name '(("(\\|)" . 'paren-face)
+                                      ("\\[\\|\\]\\|{\\|}" . 'bracket-face)))))
+
+(require 'highlight-parentheses)
+
+(add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
+(add-hook 'clojure-mode-hook 'paredit-mode)
+;;(add-hook 'clojure-mode-hook 'evil-paredit-mode)
 
 (eval-after-load 'clojure-mode
   '(font-lock-add-keywords
@@ -48,63 +53,6 @@
                      (0 (progn (compose-region (match-beginning 1)
                                                (match-end 1) "∈")
                                nil))))))
-
-(add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
-(add-hook 'nrepl-mode-hook 'paredit-mode)
-
-(add-hook 'nrepl-interaction-mode-hook
-          'nrepl-turn-on-eldoc-mode)
-
-
-
-(add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
-(defun my-nrepl-mode-setup ()
-  (require 'nrepl-ritz))
-
-
-;;    Make C-c C-z switch to the *nrepl* buffer in the current window:
-(add-to-list 'same-window-buffer-names "*nrepl*")
-
-
-;; Enabling CamelCase support for editing commands (like forward-word, backward-word, etc) in nREPL
-;; is quite useful since we often have to deal with Java class and method names. The built-in Emacs
-;; minor mode subword-mode provides such functionality:
-(add-hook 'nrepl-mode-hook 'subword-mode)
-
-;; specify the print length to be 100 to stop infinite sequences killing things.
-(defun nrepl-set-print-length ()
-  (nrepl-send-string-sync "(set! *print-length* 100)" "clojure.core"))
-
-(add-hook 'nrepl-connected-hook 'nrepl-set-print-length)
-
-;; ansi color for midje autotest.. via https://github.com/marick/Midje/issues/222
-(defun nrepl-emit-output (buffer string &optional bol)
-  "Using BUFFER, emit STRING.
-If BOL is non-nil, emit at the beginning of the line."
-  (with-current-buffer buffer
-    (nrepl-emit-output-at-pos buffer string nrepl-input-start-mark bol)
-    (ansi-color-apply-on-region (marker-position nrepl-output-start) (point-max))))
-
-
-;;Auto Complete
-(require 'ac-nrepl)
-(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'nrepl-mode))
-
-(add-hook 'nrepl-mode-hook 'auto-complete-mode)
-(add-hook 'nrepl-interaction-mode-hook 'auto-complete-mode)
-
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
-(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
-
-(add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
-
-(define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc)
-
 
 (put 'def-atomic-model 'clojure-backtracking-indent '(4 4 (2)))
 (add-hook 'clojure-mode-hook (lambda ()
@@ -143,6 +91,65 @@ If BOL is non-nil, emit at the beginning of the line."
                                  (when-let-multi 1)
 
                                  )))
+;; nrepl
+
+(add-to-list 'load-path "~/.emacs.d/vendor/nrepl-inspect")
+(require 'nrepl-inspect)
+
+(add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
+;; (add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'nrepl-mode-hook 'paredit-mode)
+
+(add-hook 'nrepl-interaction-mode-hook
+          'nrepl-turn-on-eldoc-mode)
+
+(setq nrepl-popup-stacktraces-in-repl t)
+
+(add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
+(defun my-nrepl-mode-setup ()
+  (require 'nrepl-ritz))
+
+;;    Make C-c C-z switch to the *nrepl* buffer in the current window:
+(add-to-list 'same-window-buffer-names "*nrepl*")
+
+;; Enabling CamelCase support for editing commands (like forward-word, backward-word, etc) in nREPL
+;; is quite useful since we often have to deal with Java class and method names. The built-in Emacs
+;; minor mode subword-mode provides such functionality:
+(add-hook 'nrepl-mode-hook 'subword-mode)
+
+;; specify the print length to be 100 to stop infinite sequences killing things.
+(defun nrepl-set-print-length ()
+  (nrepl-send-string-sync "(set! *print-length* 100)" "clojure.core"))
+
+(add-hook 'nrepl-connected-hook 'nrepl-set-print-length)
+
+(defadvice nrepl-default-err-handler (after nrepl-focus-errors activate)
+  "Focus the error buffer after errors, like Emacs normally does."
+  (select-window (get-buffer-window "*nrepl-error*")))
+
+;;Auto Complete
+(require 'ac-nrepl)
+(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'nrepl-mode))
+
+
+(add-hook 'nrepl-mode-hook 'auto-complete-mode)
+(add-hook 'nrepl-interaction-mode-hook 'auto-complete-mode)
+
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc)
+
+
+
+;; helpers
 
 ;; http://blog.jayfields.com/2013/05/emacs-lisp-toggle-between-clojure.html
 
@@ -176,9 +183,6 @@ If BOL is non-nil, emit at the beginning of the line."
                  (backward-char)
                  (clj-toggle-keyword-string)))))))
 
-
-(define-key clojure-mode-map (kbd "s-:") 'clj-toggle-keyword-string)
-
 (defun nrepl-reset ()
   (interactive)
   (set-buffer "*nrepl*")
@@ -192,6 +196,10 @@ If BOL is non-nil, emit at the beginning of the line."
   (nrepl-close connection-buffer)
   (nrepl-jack-in))
 
+
+;; key bindings
+
+(define-key clojure-mode-map (kbd "s-:") 'clj-toggle-keyword-string)
 (define-key clojure-mode-map (kbd "s-R") 'nrepl-reset)
 (define-key clojure-mode-map (kbd "s-I") 'nrepl-inspect)
 (define-key clojure-mode-map (kbd "s-p") 'ac-nrepl-popup-doc)
